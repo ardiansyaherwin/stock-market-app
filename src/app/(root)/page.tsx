@@ -1,5 +1,5 @@
 const Home = () => {
-  return <div className="flex min-h-screen home-wrapper">Home</div>;
+  return <section className="flex min-h-screen home-wrapper">Home</section>;
 };
 
 export default Home;

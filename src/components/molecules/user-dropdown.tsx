@@ -16,7 +16,7 @@ import NavItems from "./nav-items";
 const UserDropdown = () => {
   const router = useRouter();
 
-  const handleSignOut = async () => {
+  const handleSignOut = () => {
     router.push("/sign-in");
   };
 
@@ -55,8 +55,8 @@ const UserDropdown = () => {
               <span className="text-base font-medium text-gray-400">
                 {user.name}
               </span>
+              <span className="text-sm text-gray-500">{user.email}</span>
             </div>
-            <span className="text-sm text-gray-500">{user.email}</span>
           </div>
         </DropdownMenuLabel>
 
