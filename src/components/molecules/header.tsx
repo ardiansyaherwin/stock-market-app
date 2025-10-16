@@ -11,7 +11,7 @@ const Header = () => {
           <Image
             src="/assets/icons/logo.svg"
             alt="Stock Market App"
-            width={140}
+            width={32}
             height={32}
             className="h-8 w-auto cursor-pointer"
           />
