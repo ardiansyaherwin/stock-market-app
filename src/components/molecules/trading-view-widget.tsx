@@ -3,17 +3,24 @@ import { memo } from "react";
 import { useTradingViewWidget } from "@/hooks/use-trading-view-widget";
 import { cn } from "@/lib/utils";
 
+export enum TradingViewChardId {
+  MARKET_OVERVIEW = "market-overview",
+  STOCK_HEATMAP = "stock-heatmap",
+  TIMELINE = "timeline",
+  MARKET_QUOTES = "market-quotes",
+}
+
 interface TradingViewWidgetProps {
   title?: string;
-  scriptUrl: string;
+  chartId: TradingViewChardId;
   config: Record<string, unknown>;
   height?: number;
   className?: string;
 }
 
 const TradingViewWidget = memo(
-  ({ title, scriptUrl, config, height, className }: TradingViewWidgetProps) => {
-    const containerRef = useTradingViewWidget(scriptUrl, config, height);
+  ({ title, chartId, config, height, className }: TradingViewWidgetProps) => {
+    const containerRef = useTradingViewWidget(chartId, config, height);
 
     return (
       <>

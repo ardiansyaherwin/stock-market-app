@@ -1,13 +1,13 @@
-import { TradingViewWidget } from "@/components/molecules/trading-view-widget";
+import {
+  TradingViewChardId,
+  TradingViewWidget,
+} from "@/components/molecules/trading-view-widget";
 import {
   HEATMAP_WIDGET_CONFIG,
   MARKET_DATA_WIDGET_CONFIG,
   MARKET_OVERVIEW_WIDGET_CONFIG,
   TOP_STORIES_WIDGET_CONFIG,
 } from "@/lib/constants";
-
-const SCRIPT_BASE_URL =
-  "https://s3.tradingview.com/external-embedding/embed-widget";
 
 const Home = () => {
   return (
@@ -16,7 +16,7 @@ const Home = () => {
         <div className="md:col-span-1">
           <TradingViewWidget
             title="Market Overview"
-            scriptUrl={`${SCRIPT_BASE_URL}-market-overview.js`}
+            chartId={TradingViewChardId.MARKET_OVERVIEW}
             config={MARKET_OVERVIEW_WIDGET_CONFIG}
             className="custom-chart"
             height={600}
@@ -26,7 +26,7 @@ const Home = () => {
         <div className="xl:col-span-2">
           <TradingViewWidget
             title="Stock Heatmap"
-            scriptUrl={`${SCRIPT_BASE_URL}-stock-heatmap.js`}
+            chartId={TradingViewChardId.STOCK_HEATMAP}
             config={HEATMAP_WIDGET_CONFIG}
             className="custom-chart"
             height={600}
@@ -37,7 +37,7 @@ const Home = () => {
       <section className="grid w-full gap-8 home-section">
         <div className="h-full col-span-1">
           <TradingViewWidget
-            scriptUrl={`${SCRIPT_BASE_URL}-timeline.js`}
+            chartId={TradingViewChardId.TIMELINE}
             config={TOP_STORIES_WIDGET_CONFIG}
             height={600}
           />
@@ -45,7 +45,7 @@ const Home = () => {
 
         <div className="h-full xl:col-span-2">
           <TradingViewWidget
-            scriptUrl={`${SCRIPT_BASE_URL}-market-quotes.js`}
+            chartId={TradingViewChardId.MARKET_QUOTES}
             config={MARKET_DATA_WIDGET_CONFIG}
             height={600}
           />
