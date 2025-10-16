@@ -1,19 +1,20 @@
 "use client";
 import { memo } from "react";
 import { useTradingViewWidget } from "@/hooks/use-trading-view-widget";
+import type { TradingViewChartIdEnum } from "@/lib/enum";
 import { cn } from "@/lib/utils";
 
 interface TradingViewWidgetProps {
   title?: string;
-  scriptUrl: string;
+  chartId: TradingViewChartIdEnum;
   config: Record<string, unknown>;
   height?: number;
   className?: string;
 }
 
 const TradingViewWidget = memo(
-  ({ title, scriptUrl, config, height, className }: TradingViewWidgetProps) => {
-    const containerRef = useTradingViewWidget(scriptUrl, config, height);
+  ({ title, chartId, config, height, className }: TradingViewWidgetProps) => {
+    const containerRef = useTradingViewWidget(chartId, config, height);
 
     return (
       <>

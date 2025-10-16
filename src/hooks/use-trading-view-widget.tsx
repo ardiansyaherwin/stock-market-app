@@ -2,8 +2,11 @@
 
 import { useEffect, useMemo, useRef } from "react";
 
+const SCRIPT_BASE_URL =
+  "https://s3.tradingview.com/external-embedding/embed-widget";
+
 const useTradingViewWidget = (
-  scriptUrl: string,
+  chartId: string,
   config: Record<string, unknown>,
   height = 600,
 ) => {
@@ -21,7 +24,7 @@ const useTradingViewWidget = (
     containerRef.current.innerHTML = `<div class="tradingview-widget-container__widget" style="width: 100%; height: ${height}px"></div>`;
 
     const script = document.createElement("script");
-    script.src = scriptUrl;
+    script.src = `${SCRIPT_BASE_URL}-${chartId}.js`;
     script.async = true;
     script.innerHTML = configString;
 
@@ -34,7 +37,7 @@ const useTradingViewWidget = (
         delete containerRef.current.dataset.loaded;
       }
     };
-  }, [scriptUrl, configString, height]);
+  }, [chartId, configString, height]);
 
   return containerRef;
 };
