@@ -16,7 +16,7 @@ function generateEnvTypes() {
 
   if (!envContent) {
     console.error("❌ No .env files found");
-    return;
+    process.exit(1);
   }
 
   const envVars = envContent
