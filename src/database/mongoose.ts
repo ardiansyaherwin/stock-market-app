@@ -33,4 +33,5 @@ export const connectToDatabase = async() => {
 
   const dbName = mongoose.connection.name;
   console.log(`Connected to database [env=${process.env.NODE_ENV}, db=${dbName}]`);
+  return cached.conn;
 };

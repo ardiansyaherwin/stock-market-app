@@ -1,10 +1,13 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { type SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { FooterLink } from "@/components/molecules/forms/footer-link";
 import { InputField } from "@/components/molecules/forms/input-field";
 import { SelectField } from "@/components/molecules/forms/select-field";
 import { SelectFieldCountry } from "@/components/molecules/forms/select-field-country";
 import { Button } from "@/components/ui/button";
+import { signUpWithEmail } from "@/lib/actions/auth-action";
 import {
   INVESTMENT_GOALS,
   PREFERRED_INDUSTRIES,
@@ -12,6 +15,7 @@ import {
 } from "@/lib/constants";
 
 const SignUp = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -30,14 +34,26 @@ const SignUp = () => {
     mode: "onBlur",
   });
 
-  const onSubmit: SubmitHandler<SignUpFormData> = (data) => {
+  const onSubmit: SubmitHandler<SignUpFormData> = async (data) => {
+    console.log("onSubmit");
     try {
-      console.log({ data });
-    } catch (error) {
-      console.log(error);
+      const result = await signUpWithEmail(data);
+      if (result.success) {
+        router.push("/");
+      } else {
+        toast.error("Sign up failed", {
+          description: result.error || "Failed to create an account",
+        });
+      }
+    } catch (e) {
+      console.log(e);
+      toast.error("Sign up failed", {
+        description:
+          e instanceof Error ? e.message : "Failed to create an account",
+      });
     }
-    console.log({ data });
   };
+
   return (
     <>
       <h1 className="form-title">Sign Up & Personalize</h1>
@@ -61,9 +77,12 @@ const SignUp = () => {
           error={errors.email}
           validation={{
             required: "Email address is required",
-            pattern: /^\w+@\w+\.\w+$/,
-            // message: "Email address is required",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+              message: "Enter a valid email address",
+            },
           }}
+          autoComplete="username"
         />
 
         <SelectFieldCountry
@@ -82,6 +101,7 @@ const SignUp = () => {
           register={register}
           error={errors.password}
           validation={{ required: "Password is required", minLength: 8 }}
+          autoComplete="current-password"
         />
 
         <SelectField

@@ -12,6 +12,7 @@ const InputField = ({
   error,
   validation,
   disabled,
+  autoComplete,
 }: FormInputProps) => {
   return (
     <div className="space-y-2">
@@ -26,6 +27,7 @@ const InputField = ({
         className={cn("form-input", {
           "opacity-50 cursor-not-allowed": disabled,
         })}
+        autoComplete={autoComplete || undefined}
         {...register(name, validation)}
       />
       {error && <ErrorMessage error={error} />}
